@@ -1,0 +1,132 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART HOME</title>
+    
+    <div style="float: left;"><img class="logo" src="https://pmo.hcmute.edu.vn/Resources/Images/SubDomain/ssc/logo_spkt.jpg" width="85"/></div>
+    <div id="logo">
+        <h2 style="font-family:Arial;font-size: 100%;color: rgb(55, 127, 220);">TRƯỜNG ĐẠI HỌC</h2>
+        <h1 style="font-family:Arial;font-size: 5mm;color:rgb(55, 127, 220) ;">SƯ PHẠM KỸ THUẬT TP. HỒ CHÍ MINH</h1>
+        <hr size="4" width="60%" color="darkblue" style="float: left;"><br>
+        <h2 style="font-family:Arial;font-size: 100%;color:black;">HCMC University of Technology and Education</h2>
+    </div>
+    
+</head>
+        <link rel="stylesheet" href="mywebsite.css"> <!--liên kiết file css với file html-->
+<body>
+    <div id="header">  <!--id và class để nhóm các phần tử có cùng kiểu định dạng để ta có thể dễ dàng thay đổi -->
+        <h1 > <center><b>SMART HOME </b></center> </h1> 
+    </div>
+    <div id="main">  <!--div tạo ra khối và gán cho cái id là main để ta có thể chỉnh các thông số bên file css  -->
+        <div id="top"> <!--chia ra phần trên trong khối main -->
+            <h5 id="nhietdof" ></h5>  
+            <h5 id="doamf"></h5>
+            <h5 id="khigaf"></h5>
+            <h5 id="khongkhif"></h5><br>
+
+            <div id="nhietdo"> 
+                <center><h2 > Nhiệt Độ </h2></center> 
+                <h1><img src="image/nhietdo.png" id="nd"></h1>
+                
+            </div>
+            <div id="doam">
+                <center><h2 > Độ ẩm </h2></center> 
+                <h1><img src="image/doam.png" id="da"></h1>
+                
+            </div>
+            <div id="khiga">
+                <center><h2 > Khí ga </h2></center> 
+                <h1><img src="image/gas.png" id="kg"></h1>
+                
+            </div> 
+
+            <div id="khongkhi">
+                <center><h2 > Không khí </h2></center> 
+                <h1><img src="image/air_quality.png" id="kk"></h1>
+                
+            </div> 
+        </div>
+        <div id="bootom">   <!--phần dưới trong khối main-->
+            <div id="den">
+                <center>
+                    <img class="av" src="image/den1.png" id="img"  alt="">
+                </center>
+                <button type="button" id="btn1" class="btn waves-effect waves-lights"><h4>on</h4></button>
+                <button type="button" id="btn2" class="btn waves-effect waves-lights"><h4>off</h4></button><br><br>
+                <center><h3 > Đèn </h3></center> 
+            </div>
+            <div id="quat">
+                <center><img class="av" src="image/fan_off.png" id="img1" alt="" ></center>
+                <button type="button" id="btn3" class="btn waves-effect waves-lights"><h4>on</h4></button>
+                <button type="button" id="btn4" class="btn waves-effect waves-lights"><h4>off</h4></button><br><br>
+                <center><h3 > Quạt </h3></center> 
+            </div>
+            <div id="chuong">
+                <center><img class="av" src="image/bell_off.png" id="img2" alt="" ></center>
+                <button type="button" id="btn5" class="btn waves-effect waves-lights"><h4>on</h4></button>
+                <button type="button" id="btn6" class="btn waves-effect waves-lights"><h4>off</h4></button><br><br>
+                <center><h3 > Chuông </h3></center> 
+            </div>
+        </div>
+    </div>
+        <!--conect firebase with website-->
+        <form>
+            <script src="function.js"></script> <!--link file .js with file html-->
+            <!-- The core Firebase JS SDK is always required and must be listed first -->
+            <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+            <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+            <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script><!-- lien ket voi functions.js -->
+            <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyCxgDsstpzYSu-9zvYPr23fy3kn0lHPYyg",
+                authDomain: "projet1-9cf75.firebaseapp.com",
+                databaseURL: "https://projet1-9cf75-default-rtdb.firebaseio.com",
+                projectId: "projet1-9cf75",
+                storageBucket: "projet1-9cf75.appspot.com",
+                messagingSenderId: "73110806842",
+                appId: "1:73110806842:web:48eb70b4127629a87c7003",
+                measurementId: "G-QJM9N2V40P"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+            
+            //functions
+            // make sure that the name in ' ' match with name of your database child
+            var nhietdo = document.getElementById('nhietdof') ; //khai báo biến nhiệt độ. var là kiểu dữ liệu var=int+float+char ...
+            var dbRef = firebase.database().ref().child('nhietDo'); //đọc giá trị nhietDo từ firebase
+            
+            var doam = document.getElementById('doamf');
+            var dbRef2 = firebase.database().ref().child('doAm');   //đọc giá trị doAm từ firebase
+            
+            var luongmua = document.getElementById('luongmuaf');
+            var dbRef3 = firebase.database().ref().child('luongMua');   //đọc giá trị luongMua từ firebase
+            
+            dbRef.on('value', snap => nhietdo.innerText = snap.val());
+            dbRef2.on('value', snap => doam.innerText = snap.val());
+            dbRef3.on('value', snap => luongmua.innerText = snap.val());
+            </script>
+        </body>
+<!--phần footer phần giới thiệu thông tin liên lạc-->
+<footer> 
+    <table> <!-- thẻ tạo bảng -->
+        <thead> <!--tên mục cột-->  
+         <th>Nguyễn Thành Vĩnh </th>
+        </thead>
+            <body> <!--nội dung cột--> <!--với lần lượt các thẻ td cho từng nội dung từng cột-->
+                <td ><center> 
+                    <h4 id="f">
+                        MSSV:20161397 <br>
+                        Phone: 0397507254 <br>
+                        Email:20161397@student.hcmute.edu.vn </center>   
+                     </h4>
+                </td>
+            </body>
+    </table>  
+</footer>
+</html>
